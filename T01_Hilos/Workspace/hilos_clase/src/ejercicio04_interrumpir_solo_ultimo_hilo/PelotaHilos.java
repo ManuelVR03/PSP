@@ -15,7 +15,7 @@ public class PelotaHilos implements Runnable{
 			pelota.mueve_pelota(componente.getBounds());
 			componente.paint(componente.getGraphics());
 			try {
-				Thread.sleep(5);
+				Thread.sleep(4);
 			}catch (InterruptedException e) {
 				//e.printStackTrace();
 				Thread.currentThread().interrupt();
