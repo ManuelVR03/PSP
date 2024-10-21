@@ -17,9 +17,16 @@ public class Hilo extends Thread{
 	@Override
     public void run() {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(nombreArchivo))) {
-            for (int i = 0; i <= 10000; i++) {
-                bufferedWriter.write(i + "\n");
-            }
+        	int i2 = 1;
+        	if(isDaemon())
+        		while(true) {
+        			bufferedWriter.write(i2 + "\n");
+        			i2++;
+        		}
+        	else
+        		for (int i = 0; i <= 10000; i++) {
+        			bufferedWriter.write(i + "\n");
+        		}
             System.out.println("Hilo " + numeroHilo + " ha terminado de crear el archivo: " + nombreArchivo);
         } catch (IOException e) {
             System.out.println("Error al escribir en el archivo " + nombreArchivo);

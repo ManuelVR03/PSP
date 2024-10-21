@@ -11,15 +11,15 @@ public class HiloDemonio extends Thread{
 	}
 	
 	public void run() {
-		System.out.println("Esta tarea es una aplicación demonio: " + this.isDaemon());
-		if (num1 < num2) {
-			while (true) {
-				System.out.printf("El primer número es: %d%n", num1);
-				num1++;
-			}
-		} else {
-			System.out.println("El primer número es igual o mayor que el segundo.");
+		System.out.println(getName() + ": Esta tarea es una aplicacion demonio: " + this.isDaemon());
+		if(num1 < num2) {
+		while(true) {
+			System.out.printf(getName() + ": El primer número es: %d%n", num1);
+			num1++;
 		}
-
+		}else {
+			System.out.println(getName() + ": El primer número es igual o mayor que el segundo.");
+		}
+		System.out.println("*****************************************************");
 	}
 }
