@@ -1,16 +1,4 @@
-<<<<<<< HEAD
-/ejercicio08_bancoSinSincronizar/
-/ejercicio09_banco_uso_ReentrantLock/
-=======
-/ejercicio01_conceptos_hilos/
-/ejercicio01_hilo_vacio/
-/ejercicio02_varios_hilos_simultaneos/
-/ejercicio03_interrumpir_un_hilo/
-/ejercicio04_interrumpir_solo_ultimo_hilo/
-/ejercicio05_interrumpir_varios_hilo/
-/ejercicio06_hilos_sin_sincronizar/
-/ejercicio07_sincronizar_hilos/
+/ejercicio10_banco_uso_bloqueoConCondicion/
 /ejercicio_clase/
-/module-info.class
 /prueba_evaluable/
->>>>>>> 3e85a7a22b8aa0e3975ce50ad8ae3f482a770c33
+/ejercicio11_banco_uso_bloqueoConObject/
