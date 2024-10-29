@@ -1,36 +1,38 @@
 package ejercicio04;
 
 class HiloTarea extends Thread {
-    private static final Object lock = new Object(); // Objeto de bloqueo para sincronización
-    private static int contador = 1; // Contador de mensajes
-    private String nombreHilo;
+    private static Object lock; // Objeto de bloqueo para sincronización
+    private static int contador; // Contador de mensajes, comenzamos en 1
+    private static String nombreHiloAnterior; // Almacena el mensaje del hilo anterior
+    private Mensaje mensaje;
 
-    public HiloTarea(String nombreHilo) {
-        this.nombreHilo = nombreHilo;
-    }
-
-    private void enviarMensaje(String mensaje) {
-        System.out.println(nombreHilo + " enterado del mensaje de: " + mensaje);
+    public HiloTarea() {
+        this.mensaje = new Mensaje();
+        this.contador = 1;
+        this.nombreHiloAnterior = "";
+        this.lock = new Object();
     }
 
     @Override
     public void run() {
-        while (contador <= 10) {
+        while (contador <= 10) { // Limitar a 10 mensajes
             synchronized (lock) {
-                if (contador <= 10) {
-                    Mensaje msg = new Mensaje("MSG" + contador);
-                    enviarMensaje(Thread.currentThread().getName() + ": " + msg.getContenido());
+                System.out.println(getName() + mensaje.getContenido() + nombreHiloAnterior);
+                nombreHiloAnterior = getName() + ": MSG" + contador;
 
-                    contador++; // Incrementamos el contador para el siguiente mensaje
-                    lock.notify(); // Despertamos al otro hilo
+                // Incrementar el contador solo después de que ambos hilos hayan impreso su mensaje
+                if (getName().equals("Thread-1")) {
+                    contador++; // Incrementamos después de que Thread-1 haya enviado su mensaje
+                }
 
-                    try {
-                        if (contador <= 10) {
-                            lock.wait(); // Esperamos nuestro turno
-                        }
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                lock.notify(); // Despertamos al otro hilo
+
+                try {
+                    if (contador <= 10) {
+                        lock.wait(); // Esperamos nuestro turno
                     }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
 

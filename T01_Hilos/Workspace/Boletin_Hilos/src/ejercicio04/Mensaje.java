@@ -3,8 +3,8 @@ package ejercicio04;
 class Mensaje {
     private String contenido;
 
-    public Mensaje(String contenido) {
-        this.contenido = contenido;
+    public Mensaje() {
+        this.contenido = " enterado del mensaje de: ";
     }
 
     public String getContenido() {
