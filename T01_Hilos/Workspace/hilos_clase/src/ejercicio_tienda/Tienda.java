@@ -37,6 +37,37 @@ public class Tienda {
 	public List<Producto> getProductos() {
 		return productos;
 	}
+
+	public void procesarCompras() {
+        for (Cliente cliente : carroClientes) {
+            new Compra(cliente, this).start(); // Iniciar cada hilo de compra
+        }
+    }
+
+    // Método sincronizado para intentar realizar una compra
+    public synchronized boolean comprar(Cliente cliente) {
+        for (ItemProducto item : cliente.getFactura()) {
+            Producto producto = buscarProducto(item.getCodigoProducto());
+            if (producto == null || producto.getStock() < item.getCantidad()) {
+                System.out.println("Cliente " + cliente.getNombre() + " no puede completar la compra por falta de stock.");
+                return false;
+            }
+        }
+
+        // Descontar del stock tras verificar la disponibilidad
+        for (ItemProducto item : cliente.getFactura()) {
+            Producto producto = buscarProducto(item.getCodigoProducto());
+            producto.setStock(producto.getStock() - item.getCantidad());
+        }
+
+        System.out.println("Cliente " + cliente.getNombre() + " ha completado su compra con éxito.");
+        return true;
+    }
+
+    // Método para buscar un producto por código
+    private Producto buscarProducto(int codigoProducto) {
+        return productos.stream().filter(p -> p.getCodigoProducto() == codigoProducto).findFirst().orElse(null);
+    }
 	
 	
 }
