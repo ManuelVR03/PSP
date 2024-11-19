@@ -30,19 +30,23 @@ public class Servidor {
 			int puertoCliente;
 			InetAddress direccion;
 			int numeroCliente;
+			int numeroEnvio;
 			while (true) {
 				peticion = new DatagramPacket(buffer, buffer.length);
 				socketUDP.receive(peticion);
 				System.out.println("Recibo la informacion del cliente");
-				mensaje = new String(peticion.getData());
-				System.out.println(mensaje);
+				mensaje = new String(peticion.getData(), 0, peticion.getLength());
+				numeroCliente = Integer.parseInt(mensaje);
 				puertoCliente = peticion.getPort();
 				direccion = peticion.getAddress();
-				mensaje = "¡Hola mundo desde el servidor!";
-				buffer = mensaje.getBytes();
-				respuesta = new DatagramPacket(buffer, buffer.length, direccion, puertoCliente);
-				System.out.println("Envio la informacion del cliente");
-				socketUDP.send(respuesta);
+				System.out.println("Envío la información: ");
+				for(int i = 1; i <= 10; i++) {
+					numeroEnvio = numeroCliente + i;
+					mensaje = String.valueOf(numeroEnvio);
+					byte[] bufferEnvio = mensaje.getBytes();
+					respuesta = new DatagramPacket(bufferEnvio, bufferEnvio.length, direccion, puertoCliente);
+					socketUDP.send(respuesta);
+				}				
 			}
 		} catch (SocketException ex) {
 			Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);

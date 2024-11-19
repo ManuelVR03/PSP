@@ -15,9 +15,10 @@ public class Cliente {
 	public static void main(String[] args) {
 		
 		final int PUERTO_SERVIDOR = 5000;
-		byte[] buffer = new byte[1024];
+		byte[] buffer;
 		InetAddress direccionServidor;
 		DatagramSocket socketUDP;
+		int num;
 		String mensaje;
 		DatagramPacket pregunta;
 		DatagramPacket peticion;
@@ -26,16 +27,20 @@ public class Cliente {
 			direccionServidor = InetAddress.getByName("localhost");
 			socketUDP = new DatagramSocket();
 			System.out.println("Introduce un número");
-			mensaje = teclado.nextLine();
-			buffer = mensaje.getBytes("UTF-8");
+			num = teclado.nextInt();
+			buffer = String.valueOf(num).getBytes("UTF-8");
 			pregunta = new DatagramPacket(buffer, buffer.length, direccionServidor, PUERTO_SERVIDOR);
 			System.out.println("Envio el datagrama");
             socketUDP.send(pregunta);
-            peticion = new DatagramPacket(buffer, buffer.length);
-            socketUDP.receive(peticion);
             System.out.println("Recibo la peticion");
-            mensaje = new String(peticion.getData());
-            System.out.println(mensaje);
+            System.out.println("Los 10 siguientes números a " + num + " son:");
+            for(int i = 0; i < 10; i++) {
+            	buffer = new byte[1024];
+            	peticion = new DatagramPacket(buffer, buffer.length);
+            	socketUDP.receive(peticion);
+            	mensaje = new String(peticion.getData(), 0, peticion.getLength());
+            	System.out.println(mensaje);
+            }
             socketUDP.close();
 		} catch (SocketException ex) {
             Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
