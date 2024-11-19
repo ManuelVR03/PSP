@@ -8,6 +8,8 @@ public class Test {
 		long startTime;
 		long endTime;
 		
+		System.out.println("Cantidad de núcleos del procesador: " + Runtime.getRuntime().availableProcessors());
+		
 		for(int i = 0; i < vector.length; i++)
 			vector[i] = (int) (Math.floor(Math.random()*1000) + 1);
 

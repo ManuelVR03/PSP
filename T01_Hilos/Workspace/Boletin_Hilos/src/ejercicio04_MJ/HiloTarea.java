@@ -15,7 +15,7 @@ public class HiloTarea extends Thread{
 				this.mensaje.setMensaje(this.getName() + ": MSG" + i);
 			}
 			try {
-				sleep(5000);
+				sleep(3000);
 			}
 			catch(InterruptedException e) {
 				e.printStackTrace();
