@@ -26,10 +26,11 @@ public class Servidor {
 			in = new DataInputStream(socket.getInputStream());
 			out = new DataOutputStream(socket.getOutputStream());
 
-			do {
+			while(true) {
                 num1 = in.readInt();
                 num2 = in.readInt();
                 op = in.readUTF();
+                if(op.equalsIgnoreCase("salir")) break;
                 switch(op) {
                 case "+":
                 	resultado = num1 + num2;
@@ -46,7 +47,7 @@ public class Servidor {
                 	
                 }
                 out.writeFloat(resultado);
-            } while (num2 != 0 && !op.equals("/"));
+            }
 
 			socket.close();
 			servidor.close();

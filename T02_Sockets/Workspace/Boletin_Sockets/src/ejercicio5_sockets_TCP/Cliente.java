@@ -30,7 +30,7 @@ public class Cliente {
 			socket = new Socket(HOST, PUERTO);
 			out = new DataOutputStream(socket.getOutputStream());
 			
-			do {
+			while(true) {
 				teclado = new Scanner(System.in);
                 System.out.println("Introduce un número: ");
                 num1 = teclado.nextInt();
@@ -41,9 +41,10 @@ public class Cliente {
                 System.out.println("Introduce una operación (+, -, *, /): ");
                 teclado = new Scanner(System.in);
                 op = teclado.nextLine();
+                if(op.equalsIgnoreCase("salir")) break;
                 out.writeUTF(op);
 
-            } while (num2 != 0 && !op.equals("/"));
+            }
 			
 			socket.close();
 			teclado.close();
