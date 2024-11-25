@@ -26,28 +26,32 @@ public class Servidor {
 			in = new DataInputStream(socket.getInputStream());
 			out = new DataOutputStream(socket.getOutputStream());
 
-			while(true) {
-                num1 = in.readInt();
-                num2 = in.readInt();
-                op = in.readUTF();
-                if(op.equalsIgnoreCase("salir")) break;
-                switch(op) {
-                case "+":
-                	resultado = num1 + num2;
-                	break;
-                case "-":
-                	resultado = num1 - num2;
-                	break;
-                case "*":
-                	resultado = num1 * num2;
-                	break;
-                case "/":
-                	resultado = num1 / num2;
-                	break;
-                	
-                }
-                out.writeFloat(resultado);
-            }
+			while (true) {
+				num1 = in.readInt();
+				num2 = in.readInt();
+				op = in.readUTF();
+				if (op.equalsIgnoreCase("salir"))
+					break;
+				switch (op) {
+				case "+":
+					resultado = num1 + num2;
+					break;
+				case "-":
+					resultado = num1 - num2;
+					break;
+				case "*":
+					resultado = num1 * num2;
+					break;
+				case "/":
+					if(num2 == 0)
+						resultado = 0;
+					else
+						resultado = num1 / num2;
+					break;
+				}
+
+				out.writeFloat(resultado);
+			}
 
 			socket.close();
 			servidor.close();

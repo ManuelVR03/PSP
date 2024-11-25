@@ -21,14 +21,19 @@ public class Cliente {
 		final int PUERTO = 5000;
 		final String HOST = "127.0.0.1";
 		DataOutputStream out;
+		DataInputStream in;
 		Socket socket;
 		Scanner teclado;
 		int num1, num2;
+		float resultado;
 		String op;
+		String error = "error";
 		
 		try {
 			socket = new Socket(HOST, PUERTO);
+			System.out.println("Inicio cliente");
 			out = new DataOutputStream(socket.getOutputStream());
+			in = new DataInputStream(socket.getInputStream());
 			
 			while(true) {
 				teclado = new Scanner(System.in);
@@ -43,7 +48,9 @@ public class Cliente {
                 op = teclado.nextLine();
                 if(op.equalsIgnoreCase("salir")) break;
                 out.writeUTF(op);
-
+                resultado = in.readFloat();
+                System.out.println("El resultado de la operación es: " + resultado);
+                
             }
 			
 			socket.close();
