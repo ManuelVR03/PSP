@@ -38,8 +38,10 @@ public class Cliente {
 				System.out.println("Introduce un número positivo: ");
 				num = teclado.nextInt();
 				out.writeInt(num);
+				if(num >= 0) {
 				escuchar = in.readUTF();
 				System.out.println("Servidor dice: " + escuchar);
+				}
 			}while (num >= 0);
 			
 			socket.close();

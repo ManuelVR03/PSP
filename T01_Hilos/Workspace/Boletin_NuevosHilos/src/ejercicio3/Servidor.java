@@ -53,6 +53,9 @@ public class Servidor {
 				}
 				num = in.readInt();
 			}
+			if (!linea.isEmpty()) {
+                escribir.write(linea + "\n");
+            }
 
 			escribir.close();
 			fichero.close();
