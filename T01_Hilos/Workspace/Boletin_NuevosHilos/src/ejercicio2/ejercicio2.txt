@@ -1,0 +1,20 @@
+La informática es la ciencia que estudia el tratamiento automático de la información.
+El primer ordenador de la historia fue el ENIAC, construido en 1946.
+El lenguaje de programación Java fue desarrollado por Sun Microsystems en 1995.
+La memoria RAM es volátil y pierde su contenido al apagar el dispositivo.
+Alan Turing es considerado uno de los padres de la informática.
+La ciberseguridad busca proteger sistemas y redes de posibles ataques.
+El sistema operativo más usado en servidores es Linux.
+La primera versión de Windows fue lanzada en 1985.
+Un byte está compuesto por 8 bits y es la unidad básica de almacenamiento.
+El machine learning es una rama de la inteligencia artificial.
+Un compilador traduce el código fuente a lenguaje máquina.
+El protocolo HTTP es la base de la comunicación web.
+La programación orientada a objetos usa conceptos como clases y objetos.
+La nube permite almacenar y acceder a datos desde cualquier lugar.
+Los sistemas distribuidos constan de múltiples nodos que trabajan juntos.
+Un algoritmo es una secuencia de pasos para resolver un problema.
+El software libre permite el uso, modificación y distribución sin restricciones.
+Las bases de datos relacionales organizan información en tablas.
+El ancho de banda mide la capacidad de transmisión de datos de una red.
+La informática forense analiza sistemas para encontrar evidencia digital.

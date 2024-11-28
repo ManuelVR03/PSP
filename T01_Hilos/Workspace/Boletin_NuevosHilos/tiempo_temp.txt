@@ -1,0 +1,11 @@
+Temperatura: 12.5ºC
+Temperatura: 77.6ºC
+Temperatura: 34.5ºC
+Temperatura: 34.6ºC
+Temperatura: 7.88ºC
+Temperatura: 12.4ºC
+Temperatura: 12.8ºC
+Temperatura: -23.45ºC
+Temperatura: -23.4ºC
+Temperatura: 32.6ºC
+Temperatura: 445.6ºC
