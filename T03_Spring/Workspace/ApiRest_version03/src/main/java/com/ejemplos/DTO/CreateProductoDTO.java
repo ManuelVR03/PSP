@@ -8,6 +8,6 @@ public class CreateProductoDTO {
 
 	private String nombre;
 	private float precio;
-	private Long categoriaId;
+	private Long categoriaIdcat;
 	
 }

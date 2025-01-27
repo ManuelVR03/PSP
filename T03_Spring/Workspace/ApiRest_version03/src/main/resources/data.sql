@@ -1,6 +1,6 @@
-insert into categoria (id, nombre) values (1, 'Comida');
-insert into categoria (id, nombre) values (2, 'Bebida');
-insert into categoria (id, nombre) values (3, 'Complementos');
+insert into categoria (idcat, nombre) values (1, 'Comida');
+insert into categoria (idcat, nombre) values (2, 'Bebida');
+insert into categoria (idcat, nombre) values (3, 'Complementos');
 
 
 
