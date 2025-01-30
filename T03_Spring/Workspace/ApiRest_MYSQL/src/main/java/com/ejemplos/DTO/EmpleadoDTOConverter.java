@@ -35,7 +35,6 @@ public class EmpleadoDTOConverter {
                 map().setEmail(source.getEmail());
                 map().setSalario(source.getSalario());
 
-                // Mapea departamento_id a una entidad Departamento
                 using(ctx -> {
                     Long departamentoId = (Long) ctx.getSource();
                     return departamentoRepository.findById(departamentoId)
