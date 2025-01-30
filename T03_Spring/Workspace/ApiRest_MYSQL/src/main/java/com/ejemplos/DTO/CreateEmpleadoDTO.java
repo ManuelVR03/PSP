@@ -5,7 +5,6 @@ import lombok.Setter;
 
 @Getter @Setter
 public class CreateEmpleadoDTO {
-
 	private String nombre;
 	private String email;
 	private double salario;

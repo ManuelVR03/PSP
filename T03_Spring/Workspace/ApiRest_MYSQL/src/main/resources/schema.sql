@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS proyecto (
     nombre VARCHAR(100) NOT NULL
 );
 
--- Crear la tabla 'empleados'
+-- Crear la tabla 'empleado'
 CREATE TABLE IF NOT EXISTS empleado (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
