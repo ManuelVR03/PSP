@@ -27,4 +27,8 @@ public class UsuarioService {
 		return Arrays.asList(response);
 	}
 	
+	public void borraUsuario(Long id) {
+		restTemplate.delete(basePath+"/usuario/"+id);
+	}
+	
 }

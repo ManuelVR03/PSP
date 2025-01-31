@@ -29,10 +29,7 @@ public class UsuarioController {
 	@GetMapping("/usuario")
 	public ResponseEntity<?> obtenerTodos() {
 		List<Usuario> result = usuarioRepositorio.findAll();
-		if (result.isEmpty())
-			return ResponseEntity.notFound().build();
-		else
-			return ResponseEntity.ok(result);
+		return ResponseEntity.ok(result);
 	}
 	
 
