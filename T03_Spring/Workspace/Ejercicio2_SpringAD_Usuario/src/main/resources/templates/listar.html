@@ -10,12 +10,15 @@
 <body>
 	<div class="container">
 		<h1 th:text="${titulo}" class="text-center"></h1>
-		<div th:if="${usuarios.isEmpty()}" class="alert alert-warning text-center">
+		<div>
+			<button class="btn btn-success" th:attr="onclick=|window.location.href='@{/form}'|">Crear Usuario</button>
+		</div>
+		<div th:if="${usuarios.isEmpty()}" class="alert alert-warning text-center mt-3">
 			No hay usuarios en la lista!
 		</div>
 
 		<div th:if="${not usuarios.isEmpty()}">
-			<table class="table table-striped table-hover">
+			<table class="table table-striped table-hover mt-3">
 				<thead class="table-dark">
 					<tr>
 						<th>ID</th>
@@ -23,6 +26,7 @@
 						<th>Usuario</th>
 						<th>Avatar</th>
 						<th>Email</th>
+						<th>Editar</th>
 						<th>Eliminar</th>
 						<th>Eliminar2</th>
 						<th>Eliminar3</th>							
@@ -35,7 +39,8 @@
 						<td th:text="${usuario.usuario}"></td>
 						<td th:text="${usuario.avatar}"></td>
 						<td th:text="${usuario.email ?: 'No tiene email asociado'}"></td>
-						<td><a th:href="@{/eliminar/} + ${usuario.id}">Eliminar</a></td>
+						<td><a class="btn btn-primary" th:href="@{/form/} + ${usuario.id}" th:text="Editar"></a></td>
+						<td><a th:href="@{/eliminar/} + ${usuario.id}" th:text="Eliminar" onclick="return confirm('Estas seguro que quieres eliminar')"></a></td>
 						<td><a th:href="${'eliminar/' + usuario.id}">Eliminar</a></td>
 						<td><button class="btn btn-danger" th:attr="onclick=|window.location.href='@{/eliminar/{id}(id=${usuario.id})}'|">Eliminar</button></td>
 					</tr>

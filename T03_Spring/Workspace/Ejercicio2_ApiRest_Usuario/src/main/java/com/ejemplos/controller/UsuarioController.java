@@ -29,6 +29,8 @@ public class UsuarioController {
 	@GetMapping("/usuario")
 	public ResponseEntity<?> obtenerTodos() {
 		List<Usuario> result = usuarioRepositorio.findAll();
+		if (result.isEmpty())
+			return ResponseEntity.notFound().build();
 		return ResponseEntity.ok(result);
 	}
 	
@@ -66,5 +68,17 @@ public class UsuarioController {
 			return ResponseEntity.noContent().build();
 		}else
 			return ResponseEntity.notFound().build();
+	}
+	
+	@GetMapping("/saludo/{id}")
+	public ResponseEntity<?> saludo(@PathVariable Long id){
+		Usuario usuario = usuarioRepositorio.findById(id).orElse(null);
+		String saludo;
+		if (usuario == null)
+			return ResponseEntity.notFound().build();
+		else {
+			saludo = "Hola, ¿Cómo estás " + usuario.getNombre() + "?";
+			return ResponseEntity.ok(saludo);
+		}
 	}
 }

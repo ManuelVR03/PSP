@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SenderoDTO {
 
-	private String cod_sendero;
 	private String nombre;
+	private Integer distancia;
 	private String municipioNombre;
 }
