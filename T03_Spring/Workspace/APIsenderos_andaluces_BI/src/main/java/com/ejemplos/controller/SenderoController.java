@@ -1,6 +1,7 @@
 package com.ejemplos.controller;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +25,7 @@ import com.ejemplos.DTO.SenderoDTOWeb;
 import com.ejemplos.excepciones.ApiError;
 import com.ejemplos.excepciones.MunicipioNotFoundException;
 import com.ejemplos.excepciones.SenderoNotFoundException;
+import com.ejemplos.modelo.Municipio;
 import com.ejemplos.modelo.MunicipioRepositorio;
 import com.ejemplos.modelo.Sendero;
 import com.ejemplos.modelo.SenderoRepositorio;
@@ -60,6 +62,16 @@ public class SenderoController {
 		}
 	}
 	
+	@GetMapping("/municipio")
+	public ResponseEntity<?> obtenerMunicipios() {
+		List<Municipio> result = municipioRepositorio.findAll();
+		if (result.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		} else {
+			return ResponseEntity.ok(result);
+		}
+	}
+	
 	@GetMapping("/senderoweb")
 	public ResponseEntity<?> obtenerSenderosWeb() {
 		List <Sendero> result = senderoRepositorio.findAll();
@@ -85,6 +97,9 @@ public class SenderoController {
 		if(!municipioRepositorio.existsById(nuevo.getMunicipioCod_municipio())) throw new MunicipioNotFoundException(nuevo.getMunicipioCod_municipio());
 		Sendero s = senderoDTOConverter.convertirASend(nuevo);
 		s.setCod_sendero(senderoService.getNextCodSendero());
+		List<Sendero> senderos = new ArrayList<>();
+		senderos.add(s);
+		s.getMunicipio().setSenderos(senderos);
 		return ResponseEntity.status(HttpStatus.CREATED).body(senderoRepositorio.save(s));
 	}
 	
@@ -101,6 +116,8 @@ public class SenderoController {
 		if (editar.getDificultad() == null)
 			s.setDificultad(aux.getDificultad());
 		if(!municipioRepositorio.existsById(editar.getMunicipioCod_municipio())) throw new MunicipioNotFoundException(id);
+		if(!s.getMunicipio().getSenderos().contains(s))
+			s.getMunicipio().addSenderos(s);
 		return ResponseEntity.ok(senderoRepositorio.save(s));		
 	}
 	
@@ -110,6 +127,7 @@ public class SenderoController {
 		if (result == null)
 			throw new SenderoNotFoundException(id);
 		senderoRepositorio.delete(result);
+		result.getMunicipio().deleteSendero(result);
 		return ResponseEntity.noContent().build();
 	}
 	
