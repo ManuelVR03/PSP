@@ -88,7 +88,8 @@ public class SenderoController {
 		Sendero result = senderoRepositorio.findById(id).orElse(null);
 		if (result == null)
 			throw new SenderoNotFoundException(id);
-		return ResponseEntity.ok(result);
+		SenderoDTO dto = senderoDTOConverter.convertirADto(result);
+		return ResponseEntity.ok(dto);
 		
 	}
 	
@@ -115,6 +116,8 @@ public class SenderoController {
 			s.setDistancia(aux.getDistancia());
 		if (editar.getDificultad() == null)
 			s.setDificultad(aux.getDificultad());
+		if (editar.getFecha_creacion() == null)
+			s.setFecha_creacion(aux.getFecha_creacion());
 		if(!municipioRepositorio.existsById(editar.getMunicipioCod_municipio())) throw new MunicipioNotFoundException(id);
 		if(!s.getMunicipio().getSenderos().contains(s))
 			s.getMunicipio().addSenderos(s);
