@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<productos> 
+	<producto idref="p20"> 
+		<nombre>pincel</nombre> 
+		<categoria>pintura</categoria> 
+		<marca>mir</marca> 
+	</producto> 
+	<producto idref="p41"> 
+		<nombre>recambio a4</nombre> 
+		<categoria>papeleria</categoria> 
+		<marca>Enri</marca> 
+	</producto> 
+	<producto idref="p32"> 
+		<nombre>puzzle</nombre> 
+		<categoria>varios</categoria> 
+		<marca>point</marca> 
+	</producto>
+</productos>
