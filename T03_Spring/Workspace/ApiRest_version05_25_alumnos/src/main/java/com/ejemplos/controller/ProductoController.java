@@ -1,6 +1,7 @@
 package com.ejemplos.controller;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +21,9 @@ import com.ejemplos.DTO.ProductoDTO;
 import com.ejemplos.DTO.ProductoDTOConverter;
 import com.ejemplos.excepciones.ApiError;
 import com.ejemplos.excepciones.ProductoNotFoundException;
+import com.ejemplos.modelo.CategoriaRepositorio;
 import com.ejemplos.modelo.Producto;
+import com.ejemplos.modelo.Categoria;
 import com.ejemplos.modelo.ProductoRepositorio;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ejemplos.DTO.CreateProductoDTO;
@@ -33,6 +36,9 @@ import lombok.RequiredArgsConstructor;
 public class ProductoController {
 	@Autowired
 	private   ProductoRepositorio productoRepositorio; 
+	
+	@Autowired
+	private   CategoriaRepositorio categoriaRepositorio; 
 	
 	@Autowired
 	private ProductoDTOConverter productoDTOConverter;
@@ -56,6 +62,34 @@ public class ProductoController {
 		}
 
 	}
+	
+	@GetMapping("/categoria")
+	public ResponseEntity<?> obtenerTodasCategorias() {
+		List<Categoria> result = categoriaRepositorio.findAll();
+
+		if (result.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		} else {
+			return ResponseEntity.ok(result);
+		}
+
+	}
+	
+	@GetMapping("/categoria/{id}")
+	public ResponseEntity<?> obtenerProductosCategoria(@PathVariable Long id) {
+			List<Producto> result = productoRepositorio.findAll();
+			List<Producto> productos = new ArrayList<Producto>();
+			if(categoriaRepositorio.existsById(id)) {
+				for(Producto p: result) {
+					if(p.getCategoria().getIdcat() == id) {
+						productos.add(p);
+					}
+				}
+				return ResponseEntity.ok(productos);
+			}else {
+				return ResponseEntity.notFound().build();
+			}		
+	}
 
 
 	/********************************************************************************************/
@@ -67,6 +101,12 @@ public class ProductoController {
 			
 			return ResponseEntity.ok(result);
 	}
+	
+	@GetMapping("/categorias/{id}")
+	public ResponseEntity<?> obtenerUnoCategoria(@PathVariable Long id) {
+			Categoria result = categoriaRepositorio.findById(id).orElse(null);
+			return ResponseEntity.ok(result);
+	}
 
 	/********************************************************************************************/
 	
@@ -75,8 +115,6 @@ public class ProductoController {
 		Producto n= productoDTOConverter.convertirAProd(nuevo);
 		return ResponseEntity.status(HttpStatus.CREATED).body(productoRepositorio.save(n));
 	}
-	
-	
 	
 	@PutMapping("/producto/{id}")
 	public ResponseEntity<?> editarProducto(@RequestBody CreateProductoDTO editar, @PathVariable Long id) {
